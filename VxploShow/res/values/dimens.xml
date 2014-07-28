@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="login_margintop">100.0dip</dimen>
-    <dimen name="sign_margintop">50.0dip</dimen>
-    <dimen name="slidingmenu_offset">100.0dip</dimen>
-    <dimen name="shadow_width">10dip</dimen>
-    <dimen name="bottom_pop_btn_height">35dp</dimen>
-    <dimen name="bottom_pop_btn_margin">8dp</dimen>
-</resources>
