@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="privacy">
+        <item >Private</item>
+        <item >Public</item>
+        <item >Allow copy</item>
+    </string-array>
+    
+    <string-array name="report">
+        <item >Spam</item>
+        <item >Nudity or Pornography</item>
+        <item >Graphic Violence</item>
+        <item >Hateful Speech or Symbols</item>
+        <item >Other</item>
+    </string-array>
+    
+    <string-array name="mobile_network_choice">
+        <item >Cancel upload</item>
+        <item >Upload this time</item>
+        <item >Upload,do not remind me later</item>
+    </string-array>
+</resources>

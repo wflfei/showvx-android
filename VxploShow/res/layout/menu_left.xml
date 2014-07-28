@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/repeat_bg"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/leftmenu_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="30dp" >
+
+        <!--  <com.vxplo.vxshow.widget.AvatarView
+            android:id="@+id/user_avater"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/touxiangkuang"
+            android:scaleType="centerInside" />
+            -->
+        <FrameLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            
+            <ImageView 
+            android:id="@+id/leftmenu_user_head"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/default_head2"
+            android:contentDescription="@null"
+            />
+        
+        <ImageView 
+            android:id="@+id/leftmenu_user_head_bounds"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/head_bounds"
+            android:contentDescription="@null"
+            />
+        </FrameLayout>
+        
+
+        <TextView
+            android:id="@+id/leftmenu_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Yan"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/leftmenu_header"
+
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/leftmenu_btn_ins"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/selector_btn_ins"
+            android:drawableLeft="@drawable/selector_left_fragment_btn_ins"
+            android:drawablePadding="20dp"
+            android:gravity="left|center_vertical"
+            android:text="@string/left_btn_ins"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/leftmenu_btn_proj"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/selector_btn_ins"
+            android:drawableLeft="@drawable/selector_left_fragment_btn_proj"
+            android:drawablePadding="20dp"
+            android:gravity="left|center_vertical"
+            android:text="@string/left_btn_proj"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/leftmenu_btn_fav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/selector_btn_ins"
+            android:drawableLeft="@drawable/selector_left_fragment_btn_fav"
+            android:drawablePadding="20dp"
+            android:gravity="left|center_vertical"
+            android:text="@string/left_btn_fav"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/leftmenu_btn_log_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/selector_btn_logout"
+        android:layout_alignParentBottom="true"
+        android:gravity="left|center_vertical"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp" />
+
+</RelativeLayout>

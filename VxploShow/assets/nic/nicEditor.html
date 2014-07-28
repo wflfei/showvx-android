@@ -1,0 +1,28 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />   
+	<title>Editor</title>
+	<script type="text/javascript">
+        function getData()
+        {
+            window.androidactivity.getHtmlData(ndinstance.getContent());
+        }
+    </script>
+</head>
+<body>
+
+<div id="sample">
+<script type="text/javascript" src="../nicEdit.js"></script>
+<script type="text/javascript">
+	bkLib.onDomLoaded(function() { 
+	ndPanel = new nicEditor({fullPanel : true}).panelInstance('area1');
+	ndinstance = ndPanel.nicInstances[0]; });
+</script>
+
+<textarea id="area1" style="width: 100%; height: 300px;">
+</textarea>
+
+</div>
+
+</body>
+</html>
