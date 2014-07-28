@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:shape="rectangle">
+    
+    <corners android:radius="2dp"/>
+    <gradient android:startColor="@color/black_overlay"
+        android:centerColor="#66555555"
+        android:endColor="@color/black_overlay"
+        android:angle="90"
+        />
+    <stroke android:width="@dimen/bottom_pop_btn_margin"
+        android:color="@color/transparent"/>
+
+</shape>

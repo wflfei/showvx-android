@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/btn_style_alert_dialog_background"
+    android:gravity="bottom"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/record_dialog_text"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="50dp"
+        android:layout_weight="0.70"
+        android:text="record name"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:id="@+id/record_dialog_bottom"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/record_dialog_cancel"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.00"
+            android:background="@drawable/record_cancel" />
+
+        <Button
+            android:id="@+id/record_dialog_upload"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.00"
+            android:background="@drawable/record_upload" />
+
+        <Button
+            android:id="@+id/record_dialog_play"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.00"
+            android:background="@drawable/record_play" />
+    </LinearLayout>
+
+</LinearLayout>

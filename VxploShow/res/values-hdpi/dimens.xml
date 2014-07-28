@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<dimen name="login_margintop">150.0dip</dimen>
+	<dimen name="sign_margintop">50.0dip</dimen>
+	
+	<dimen name="item_width">50.0dip</dimen>
+	<dimen name="item_textsize">12sp</dimen>
+	
+	<dimen name="main_actionbar_height">38dp</dimen>
+	<dimen name="bottom_pop_btn_height">35dp</dimen>
+    <dimen name="bottom_pop_btn_margin">8dp</dimen>
+	
+</resources>

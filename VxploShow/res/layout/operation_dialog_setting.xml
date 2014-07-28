@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/tanchukuang"
+    android:orientation="vertical"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="48dp" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp" />
+
+        <ImageButton
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/selector_btn_close" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/edit_pname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/shurukuang"
+            android:hint="@string/project_name"
+            android:inputType="text"
+            android:textColor="@android:color/white"
+            android:textCursorDrawable="@drawable/tiao1"
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/category"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/listPreferredItemHeight"
+            android:background="@drawable/shurukuang"
+            android:popupBackground="@drawable/xialakuang"
+            android:layout_marginBottom="4dp"
+            android:spinnerMode="dropdown" />
+
+        <Spinner
+            android:id="@+id/privacy"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:background="@drawable/shurukuang"
+            android:popupBackground="@drawable/xialakuang"
+            android:entries="@array/privacy"
+            android:spinnerMode="dropdown" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_btn_login"
+        android:text="@string/btn_login"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="4dp" />
+
+</LinearLayout>

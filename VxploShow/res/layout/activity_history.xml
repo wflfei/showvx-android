@@ -1,0 +1,33 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${packageName}.${activityClass}" >
+
+    <!-- 
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/black_overlay" >
+    </ListView>
+     -->
+     <android.support.v4.view.ViewPager
+        android:id="@+id/history_viewpaer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+    
+    <TextView 
+        android:id="@+id/no_upload_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="@color/help_button_view"
+        android:textSize="22sp"
+        android:text="@string/no_upload_history"
+        android:visibility="gone"/>
+
+</RelativeLayout>

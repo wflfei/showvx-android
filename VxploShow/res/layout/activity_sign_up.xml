@@ -1,0 +1,87 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="${packageName}.${activityClass}" >
+
+    <EditText 
+        android:id="@+id/sign_email_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/sign_margintop"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:hint="E-mail"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@drawable/shurukuang"/>
+    
+    <EditText 
+        android:id="@+id/sign_name_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sign_email_edit"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:hint="Name"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@drawable/shurukuang"/>
+    
+    <EditText 
+        android:id="@+id/sign_password_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sign_name_edit"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:inputType="textPassword"
+        android:hint="Password"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@drawable/shurukuang"/>
+    
+    <CheckBox 
+            android:id="@+id/sign_accept_check"
+            android:button="@drawable/selector_sign_up_checkbox"
+            android:layout_below="@id/sign_password_edit"
+        	android:layout_alignLeft="@id/sign_password_edit"
+        	android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:text="@string/sign_up_accept" />
+    
+    <Button
+        android:id="@+id/sign_up_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sign_accept_check"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Sign up"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@drawable/login_btn_bg" />
+    
+    <Button
+        android:id="@+id/sign_login_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/sign_up_btn"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Login"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@drawable/graylogin" />
+
+</RelativeLayout>
