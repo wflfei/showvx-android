@@ -56,7 +56,7 @@ public class UploadTask {
 								// TODO Auto-generated method stub
 								dialog.cancel();
 								if(which == 0) {
-									
+									removeAllUploadTask();
 								} else if(which == 1) {
 									task.execute();
 								} else if(which == 2) {

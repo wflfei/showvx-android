@@ -818,133 +818,134 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int beep=0x7f050000;
     }
     public static final class string {
-        public static final int OK=0x7f0a0015;
-        public static final int action_settings=0x7f0a0012;
-        public static final int alert_empty=0x7f0a0010;
+        public static final int OK=0x7f0a0016;
+        public static final int action_settings=0x7f0a0013;
+        public static final int alert_empty=0x7f0a0011;
         /**  show 
  show 
          */
-        public static final int alert_title=0x7f0a0048;
+        public static final int alert_title=0x7f0a0049;
         public static final int app_name=0x7f0a0000;
-        public static final int audios=0x7f0a0056;
-        public static final int btn_login=0x7f0a000e;
-        public static final int btn_sign_up=0x7f0a000f;
-        public static final int cancel=0x7f0a002f;
-        public static final int capture=0x7f0a0058;
-        public static final int check_update=0x7f0a0034;
-        public static final int clean_videos=0x7f0a0053;
-        public static final int click_again_to_exit=0x7f0a0035;
-        public static final int click_record=0x7f0a0037;
-        public static final int click_stop=0x7f0a0039;
-        public static final int delete=0x7f0a0019;
+        public static final int audios=0x7f0a0057;
+        public static final int btn_login=0x7f0a000f;
+        public static final int btn_sign_up=0x7f0a0010;
+        public static final int cancel=0x7f0a0030;
+        public static final int capture=0x7f0a0059;
+        public static final int check_update=0x7f0a0035;
+        public static final int clean_videos=0x7f0a0054;
+        public static final int click_again_to_exit=0x7f0a0036;
+        public static final int click_record=0x7f0a0038;
+        public static final int click_stop=0x7f0a003a;
+        public static final int delete=0x7f0a001a;
         /**  base 
  base 
          */
-        public static final int dialog_title_info=0x7f0a0014;
+        public static final int dialog_title_info=0x7f0a0015;
         public static final int do_it_later=0x7f0a0005;
-        public static final int done=0x7f0a0044;
-        public static final int dummy_button=0x7f0a0042;
-        public static final int dummy_content=0x7f0a0043;
-        public static final int exit_app=0x7f0a0032;
+        public static final int done=0x7f0a0045;
+        public static final int dummy_button=0x7f0a0043;
+        public static final int dummy_content=0x7f0a0044;
+        public static final int exit_app=0x7f0a0033;
         public static final int file_upload_finished=0x7f0a0009;
         public static final int file_upload_start=0x7f0a0007;
         public static final int file_uploading=0x7f0a0008;
-        public static final int forget_alert_empty=0x7f0a0024;
+        public static final int forget_alert_empty=0x7f0a0025;
         public static final int has_finished=0x7f0a000a;
-        public static final int hello_world=0x7f0a0020;
-        public static final int hint_report=0x7f0a001e;
-        public static final int images=0x7f0a0055;
+        public static final int hello_world=0x7f0a0021;
+        public static final int hint_report=0x7f0a001f;
+        public static final int images=0x7f0a0056;
         public static final int later_on_wifi=0x7f0a0003;
         public static final int latest_version_title=0x7f0a0001;
-        public static final int left_btn_fav=0x7f0a0028;
+        public static final int left_btn_fav=0x7f0a0029;
         /**  left frag 
  left frag 
          */
-        public static final int left_btn_ins=0x7f0a0026;
-        public static final int left_btn_log_out=0x7f0a0029;
-        public static final int left_btn_proj=0x7f0a0027;
-        public static final int loading_str=0x7f0a0016;
+        public static final int left_btn_ins=0x7f0a0027;
+        public static final int left_btn_log_out=0x7f0a002a;
+        public static final int left_btn_proj=0x7f0a0028;
+        public static final int loading_str=0x7f0a0017;
         /**  login 
  login 
          */
-        public static final int login_hint_umail=0x7f0a000c;
+        public static final int login_hint_umail=0x7f0a000d;
         /**  sign up 
  sign up 
          */
-        public static final int login_hint_uname=0x7f0a0021;
-        public static final int login_hint_upass=0x7f0a000d;
-        public static final int mobile_network_tips=0x7f0a000b;
-        public static final int no_network=0x7f0a0030;
-        public static final int no_sdcard_tip=0x7f0a003b;
-        public static final int no_upload_history=0x7f0a0051;
-        public static final int ok=0x7f0a002e;
-        public static final int picture_phone=0x7f0a002d;
-        public static final int piv_exist_message=0x7f0a0046;
-        public static final int please_type_something=0x7f0a003e;
-        public static final int predict_maxtime=0x7f0a005a;
-        public static final int project_name=0x7f0a001d;
-        public static final int record_converting=0x7f0a0038;
-        public static final int record_name=0x7f0a003a;
-        public static final int refresh=0x7f0a0033;
-        public static final int removeItem=0x7f0a0017;
+        public static final int login_hint_uname=0x7f0a0022;
+        public static final int login_hint_upass=0x7f0a000e;
+        public static final int mobile_network_tips=0x7f0a000c;
+        public static final int no_network=0x7f0a0031;
+        public static final int no_sdcard_tip=0x7f0a003c;
+        public static final int no_upload_history=0x7f0a0052;
+        public static final int ok=0x7f0a002f;
+        public static final int picture_phone=0x7f0a002e;
+        public static final int piv_exist_message=0x7f0a0047;
+        public static final int please_type_something=0x7f0a003f;
+        public static final int predict_maxtime=0x7f0a005b;
+        public static final int project_name=0x7f0a001e;
+        public static final int qrcode_tips=0x7f0a000b;
+        public static final int record_converting=0x7f0a0039;
+        public static final int record_name=0x7f0a003b;
+        public static final int refresh=0x7f0a0034;
+        public static final int removeItem=0x7f0a0018;
         /**  richtext 
  richtext 
          */
-        public static final int rich_ok=0x7f0a003c;
-        public static final int rotate=0x7f0a004a;
-        public static final int saoyisao=0x7f0a004c;
-        public static final int send_to_wechat_friends=0x7f0a004d;
-        public static final int share=0x7f0a004b;
-        public static final int share_to_timeline=0x7f0a004e;
-        public static final int sign_up_accept=0x7f0a0022;
-        public static final int sign_up_wrong_email=0x7f0a0025;
-        public static final int signup_alert_empty=0x7f0a0023;
-        public static final int skip=0x7f0a0013;
-        public static final int stop=0x7f0a0059;
-        public static final int success=0x7f0a0018;
-        public static final int takephoto_now=0x7f0a002b;
+        public static final int rich_ok=0x7f0a003d;
+        public static final int rotate=0x7f0a004b;
+        public static final int saoyisao=0x7f0a004d;
+        public static final int send_to_wechat_friends=0x7f0a004e;
+        public static final int share=0x7f0a004c;
+        public static final int share_to_timeline=0x7f0a004f;
+        public static final int sign_up_accept=0x7f0a0023;
+        public static final int sign_up_wrong_email=0x7f0a0026;
+        public static final int signup_alert_empty=0x7f0a0024;
+        public static final int skip=0x7f0a0014;
+        public static final int stop=0x7f0a005a;
+        public static final int success=0x7f0a0019;
+        public static final int takephoto_now=0x7f0a002c;
         /**  main 
  main 
          */
-        public static final int takevideo_now=0x7f0a002a;
-        public static final int text_empty_type_some=0x7f0a003f;
-        public static final int tips=0x7f0a0045;
+        public static final int takevideo_now=0x7f0a002b;
+        public static final int text_empty_type_some=0x7f0a0040;
+        public static final int tips=0x7f0a0046;
         /**  album 
  album 
          */
-        public static final int title_activity_album=0x7f0a0040;
+        public static final int title_activity_album=0x7f0a0041;
         /**  camera 
  camera 
          */
-        public static final int title_activity_camera=0x7f0a0057;
+        public static final int title_activity_camera=0x7f0a0058;
         /**  history 
  history 
          */
-        public static final int title_activity_history=0x7f0a0050;
-        public static final int title_activity_project_show=0x7f0a0041;
+        public static final int title_activity_history=0x7f0a0051;
+        public static final int title_activity_project_show=0x7f0a0042;
         /**  record 
  record 
          */
-        public static final int title_activity_record=0x7f0a0036;
-        public static final int title_activity_rich_text=0x7f0a003d;
-        public static final int title_activity_share=0x7f0a0049;
-        public static final int title_activity_sign_up=0x7f0a0011;
-        public static final int title_activity_splash=0x7f0a001f;
-        public static final int title_activity_video_confirm=0x7f0a0052;
-        public static final int title_activity_wxentry=0x7f0a004f;
-        public static final int title_report=0x7f0a001c;
+        public static final int title_activity_record=0x7f0a0037;
+        public static final int title_activity_rich_text=0x7f0a003e;
+        public static final int title_activity_share=0x7f0a004a;
+        public static final int title_activity_sign_up=0x7f0a0012;
+        public static final int title_activity_splash=0x7f0a0020;
+        public static final int title_activity_video_confirm=0x7f0a0053;
+        public static final int title_activity_wxentry=0x7f0a0050;
+        public static final int title_report=0x7f0a001d;
         /**  dialog 
  dialog 
          */
-        public static final int title_send=0x7f0a001a;
-        public static final int title_setting=0x7f0a001b;
+        public static final int title_send=0x7f0a001b;
+        public static final int title_setting=0x7f0a001c;
         public static final int update_content=0x7f0a0004;
         public static final int update_latest_version_title=0x7f0a0002;
         public static final int update_now=0x7f0a0006;
-        public static final int upload_though=0x7f0a0047;
-        public static final int uploading_tip=0x7f0a0031;
-        public static final int video_phone=0x7f0a002c;
-        public static final int videos=0x7f0a0054;
+        public static final int upload_though=0x7f0a0048;
+        public static final int uploading_tip=0x7f0a0032;
+        public static final int video_phone=0x7f0a002d;
+        public static final int videos=0x7f0a0055;
     }
     public static final class style {
         public static final int ActivityAnim=0x7f0b0002;

@@ -136,7 +136,7 @@ public class RecordActivity extends VxBaseActivity {
 
 	private void initListView() {
 		// TODO Auto-generated method stub
-		arrayAdapter = new ArrayAdapter<>(mApplication,R.layout.record_list_item, R.id.record_list_item_text, recordNames);
+		arrayAdapter = new ArrayAdapter<String>(mApplication,R.layout.record_list_item, R.id.record_list_item_text, recordNames);
 		listview.setAdapter(arrayAdapter);
 		listview.setOnItemClickListener(new OnItemClickListener() {
 

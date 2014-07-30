@@ -14,6 +14,7 @@
     <string name="file_uploading">文件上传中...</string>
     <string name="file_upload_finished">文件上传完成</string>
     <string name="has_finished">已完成:%1$d/%1$d</string>
+    <string name="qrcode_tips">请将二维码放入框内，即可自动扫描</string>
     
     <string name="mobile_network_tips">当前使用手机流量，是否仍然上传</string>
 

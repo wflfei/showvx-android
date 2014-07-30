@@ -13,6 +13,7 @@
     <string name="file_uploading">uploading file...</string>
     <string name="file_upload_finished">File has been uploaded</string>
     <string name="has_finished">Finished:%1$d/%1$d</string>
+    <string name="qrcode_tips">Align the QR Code within the frame to scan</string>
     
     <string name="mobile_network_tips">Whether to use the mobile network to upload</string>
 

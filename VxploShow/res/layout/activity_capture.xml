@@ -62,11 +62,26 @@
             android:background="@drawable/vedio_saoyisao"/>
         
     </RelativeLayout>
-
-  <TextView android:id="@+id/txtResult"
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="170dp">
+        
+        <TextView 
+            android:id="@+id/txtResult"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"  
-            android:layout_below="@id/capture_topbar"        
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="@string/qrcode_tips"
             android:textSize="14sp"/>
+        
+    </LinearLayout>
+
+  
+  
   
 </RelativeLayout>
