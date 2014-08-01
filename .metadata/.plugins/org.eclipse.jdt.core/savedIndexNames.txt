@@ -1,9 +1,0 @@
-INDEX VERSION 1.126+F:\work\gitwork\showvx-android\.metadata\.plugins\org.eclipse.jdt.core
-1678621594.index
-2569236328.index
-3984887976.index
-1661813464.index
-158440093.index
-1855537965.index
-938709367.index
-2253663371.index
