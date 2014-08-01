@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,13 +14,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.vxplo.vxshow.R;
 import com.vxplo.vxshow.activity.MainActivity;
 import com.vxplo.vxshow.activity.MainActivity.ListType;
+import com.vxplo.vxshow.asynchttp.VxHttpClient;
 import com.vxplo.vxshow.entity.Idea;
 import com.vxplo.vxshow.http.VxHttpCallback;
 import com.vxplo.vxshow.http.VxHttpRequest;
@@ -75,6 +80,36 @@ public class VxploApplication extends Application {
 
 		imageLoader = ImageLoader.getInstance();
 		imageLoader.init(config);
+	}
+	
+	public void getTokenA(Runnable callback) {
+		final Runnable cb = callback;
+		VxHttpClient.post(Constant.getUserTokenUrl(), null, false, new AsyncHttpResponseHandler() {
+			
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+				// TODO Auto-generated method stub
+				String result = new String(arg2);
+				Log.d("token", result+"");
+				JSONObject jObj;
+				try {
+					jObj = new JSONObject(result);
+					String token = jObj.optString("token");
+					pref.edit().putString("token", token).commit();
+					if (cb != null)
+						cb.run();
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
+				// TODO Auto-generated method stub
+				Log.v("GetToken", arg3.toString());
+			}
+		});
 	}
 
 	public void getToken(Runnable callback) {
@@ -175,6 +210,49 @@ public class VxploApplication extends Application {
 
 		});
 		request.send();
+	}
+	
+	public void getIdeaListAsync(ListType type, final DataLoadingCallBack callback)
+	{
+		final ListType listType = (type == null) ? ListType.INSPIRED : type;
+		VxHttpClient.get(Constant.getIdeaListUrl(listType), null, true, new AsyncHttpResponseHandler() {
+			
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+				// TODO Auto-generated method stub
+				String result = new String(arg2);
+				if(listType == ListType.INSPIRED) {
+					if(inspiredIdeas != null && inspiredIdeas.size() > 0) {
+						inspiredIdeas.clear();
+					}
+					Idea.setIdeaListFromJsonArray(inspiredIdeas, result);
+				}else if(listType == ListType.PROJECTS) {
+					if(myIdeas != null && myIdeas.size() > 0) {
+						myIdeas.clear();
+					}
+					Idea.setIdeaListFromJsonArray(myIdeas, result);
+				}else if(listType == ListType.FAVORITES) {
+					if(favouriteIdeas != null && favouriteIdeas.size() > 0) {
+						favouriteIdeas.clear();
+					}
+					Idea.setIdeaListFromJsonArray(favouriteIdeas, result);
+				}
+				Log.v("Appliction", "Project result: " + result);
+				callback.onSuccess();
+			}
+			
+			@Override
+			public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
+				// TODO Auto-generated method stub
+				if (arg2 != null && arg2.length > 0) {
+					DialogUtil.showToast(VxploApplication.getInstance(), new String(arg2));
+					return;
+				}
+				//DialogUtil.showToast(VxploApplication.getInstance(), status.name());
+				Toast.makeText(application, R.string.failed_connect, Toast.LENGTH_SHORT).show();
+				callback.onFail();
+			}
+		});
 	}
 	
 	public List<Idea> getIdeasList(ListType type) {

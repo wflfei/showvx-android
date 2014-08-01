@@ -62,7 +62,7 @@ public class SplashActivity extends VxBaseActivity {
 					tryAutoLogin();
 					return;
 				}
-				mApplication.getIdeaList(ListType.INSPIRED, new DataLoadingCallBack() {
+				mApplication.getIdeaListAsync(ListType.INSPIRED, new DataLoadingCallBack() {
 					
 					@Override
 					public void onSuccess() {

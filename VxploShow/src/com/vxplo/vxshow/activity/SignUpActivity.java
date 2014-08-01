@@ -70,7 +70,7 @@ public class SignUpActivity extends VxBaseActivity {
 							.getString(R.string.signup_alert_empty));
 					return;
 				}
-				doSignUp();
+				doSignUpAsync();
 			}
 		});
 		
@@ -98,6 +98,66 @@ public class SignUpActivity extends VxBaseActivity {
 	{
 		InputMethodManager imm = (InputMethodManager)this.getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(emailEdit.getWindowToken(), 0);
+	}
+	
+	private void doSignUpAsync()
+	{
+		String mail = emailEdit.getText().toString().trim();
+		String name = nameEdit.getText().toString().trim();
+		String pass = passwordEdit.getText().toString().trim();
+
+		
+		VxHttpRequest request = new VxHttpRequest(ctx, VxHttpMethod.POST,
+				Constant.getUserSignUpUrl(), SIGN_UP_FIELDS, new String[] {
+						mail, mail, pass, name });
+		request.setCallback(new VxHttpCallback(){
+
+			@Override
+			public void beforeSend() {
+				// TODO Auto-generated method stub
+				//DialogUtil.showLoadingDialog(ctx);
+				showLoadingDialog();
+			}
+
+			@Override
+			public void success(String result) throws Exception {
+				// TODO Auto-generated method stub
+				if(result.startsWith(INVALID_HEAD)) {
+					int start = result.lastIndexOf("The e-mail address");
+					String tempMsg = result.substring(start);
+					int end = tempMsg.indexOf(".");
+					String message = tempMsg.substring(0, end);
+					DialogUtil.showToast(ctx, tempMsg);
+				}else {
+					try {
+						Log.d("SignUpResult", result);
+						Intent intent = new Intent();
+						intent.putExtra("result", result);
+						setResult(RESULT_OK, intent);
+						finish();
+					} catch(Exception e) {
+						throw new Exception(result);
+					}
+				}
+			}
+
+			@Override
+			public void error(ErrorStatus status, Exception... exs) {
+				// TODO Auto-generated method stub
+				if(exs.length>0) {
+					DialogUtil.showToast(ctx, exs[0].getMessage());
+				}else{
+					DialogUtil.showToast(ctx, "Error, status:"+status.name());
+				}
+			}
+
+			@Override
+			public void complete() {
+				// TODO Auto-generated method stub
+				//DialogUtil.closeLoadingDialog();
+				closeLoadingDialog();
+			}});
+		request.send();
 	}
 	
 	private void doSignUp()

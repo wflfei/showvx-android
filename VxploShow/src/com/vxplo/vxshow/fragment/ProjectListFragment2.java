@@ -116,7 +116,7 @@ public class ProjectListFragment2 extends Fragment {
 	public void refreshIdeasList()
 	{
 		DialogUtil.showLoadingDialog(getActivity());
-		mApplicaiton.getIdeaList(type, new DataLoadingCallBack() {
+		mApplicaiton.getIdeaListAsync(type, new DataLoadingCallBack() {
 			
 			@Override
 			public void onSuccess() {

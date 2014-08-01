@@ -34,7 +34,7 @@ public class AlbumGridViewAdapter extends BaseAdapter implements
 	private ArrayList<HashMap<String, String>> dataList;
 	private ArrayList<HashMap<String, String>> selectedDataList;
 	private DisplayMetrics dm;
-	ImageLoader imageLoader;
+	//ImageLoader imageLoader;
 	DisplayImageOptions options;
 
 	public AlbumGridViewAdapter(Context c, ArrayList<HashMap<String, String>> dataList,
@@ -46,7 +46,7 @@ public class AlbumGridViewAdapter extends BaseAdapter implements
 		dm = new DisplayMetrics();
 		((Activity) mContext).getWindowManager().getDefaultDisplay()
 				.getMetrics(dm);
-		
+		/*
 		options = new DisplayImageOptions.Builder()
 		.showStubImage(R.drawable.ic_launcher) // 在ImageView加载过程中显示图片  
         .showImageForEmptyUri(R.drawable.ic_launcher) // image连接地址为空时  
@@ -56,7 +56,7 @@ public class AlbumGridViewAdapter extends BaseAdapter implements
         .displayer(new FadeInBitmapDisplayer(16)) // default
         .build();
 
-		imageLoader = ImageLoader.getInstance();
+		imageLoader = ImageLoader.getInstance();*/
 	}
 
 	@Override

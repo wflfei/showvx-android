@@ -2,10 +2,15 @@ package com.vxplo.vxshow.activity;
 
 import java.nio.MappedByteBuffer;
 
+import org.apache.http.Header;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.vxplo.vxshow.R;
+import com.vxplo.vxshow.asynchttp.VxHttpClient;
 import com.vxplo.vxshow.http.VxHttpCallback;
 import com.vxplo.vxshow.http.VxHttpRequest;
 import com.vxplo.vxshow.http.VxHttpRequest.VxHttpMethod;
@@ -85,42 +90,48 @@ public class ResetPassActivity extends VxBaseActivity {
 	
 	protected void doGetUidByEmail() {
 		String email = emailEdit.getText().toString().trim();
-		VxHttpRequest getUidRequest = new VxHttpRequest(getApplicationContext(), VxHttpMethod.GET, Constant.getUserGetUidUrl(), new String[] {"mail"}, new String[] {email});
-		getUidRequest.setCallback(new VxHttpCallback() {
+		VxHttpClient.get(Constant.getUserGetUidUrl(), new RequestParams("mail", email), false, new AsyncHttpResponseHandler() {
 			
 			@Override
-			public void success(String result) throws Exception {
-				// TODO Auto-generated method stub
-				Log.v("FindPwdActivity", result);
-				JSONArray uidArray = new JSONArray(result);
-				JSONObject uidObj = uidArray.getJSONObject(0);
-				String uid = uidObj.getString("uid");
-				requestResetEmail(uid);
+			public void onStart() {
+				showLoadingDialog();
+				super.onStart();
 			}
 			
 			@Override
-			public void error(ErrorStatus status, Exception... exs) {
+			public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
 				// TODO Auto-generated method stub
-				if(exs.length>0) {
-					DialogUtil.showToast(ctx, exs[0].getMessage());
-				}else{
-					DialogUtil.showToast(ctx, "Error, status:"+status.name());
+				String result = new String(arg2);
+				Log.v("FindPwdActivity", result);
+				JSONArray uidArray;
+				try {
+					uidArray = new JSONArray(result);
+					JSONObject uidObj = uidArray.getJSONObject(0);
+					String uid = uidObj.getString("uid");
+					requestResetEmail(uid);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			
+			@Override
+			public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
+				// TODO Auto-generated method stub
+				if(arg2 != null && arg2.length > 0) {
+					DialogUtil.showToast(ctx, new String(arg2));
+				} else{
+					Toast.makeText(ctx, R.string.failed_connect, Toast.LENGTH_SHORT).show();
 				}
 			}
 			
 			@Override
-			public void complete() {
-				// TODO Auto-generated method stub
+			public void onFinish() {
 				closeLoadingDialog();
-			}
-			
-			@Override
-			public void beforeSend() {
-				// TODO Auto-generated method stub
-				showLoadingDialog();
+				super.onFinish();
 			}
 		});
-		getUidRequest.send();
 	}
 
 	private void closeKeyboard()
@@ -133,6 +144,38 @@ public class ResetPassActivity extends VxBaseActivity {
 	private void requestResetEmail(String uid)
 	{
 		Log.d("ResetPassActivity", "uid: " + uid);
+		VxHttpClient.get("http://www.vxplo.cn/app/user/" + uid + "/password_reset", null, false, new AsyncHttpResponseHandler() {
+			
+			@Override
+			public void onStart() {
+				showLoadingDialog();
+				super.onStart();
+			}
+			
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+				// TODO Auto-generated method stub
+				String result = new String(arg2);
+				Log.v("FindPwdActivity", result);
+			}
+			
+			@Override
+			public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
+				// TODO Auto-generated method stub
+				if(arg2 != null && arg2.length > 0) {
+					DialogUtil.showToast(ctx, new String(arg2));
+				} else{
+					Toast.makeText(ctx, R.string.failed_connect, Toast.LENGTH_SHORT).show();
+				}
+			}
+			
+			@Override
+			public void onFinish() {
+				closeLoadingDialog();
+				super.onFinish();
+			}
+		});
+		/*
 		VxHttpRequest getUidRequest = new VxHttpRequest(getApplicationContext(), VxHttpMethod.GET, "http://www.vxplo.cn/app/user/" + uid + "/password_reset");
 		getUidRequest.setCallback(new VxHttpCallback() {
 			
@@ -165,6 +208,7 @@ public class ResetPassActivity extends VxBaseActivity {
 			}
 		});
 		getUidRequest.send();
+		*/
 	}
 	
 	

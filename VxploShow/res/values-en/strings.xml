@@ -8,13 +8,15 @@
     <string name="update_content">New Version:\n%1$s</string>
     <string name="do_it_later">Do it later</string>
     <string name="update_now">Update now</string>
+    <string name="downloading_update">Downloading update file</string>
     
     <string name="file_upload_start">Start uploading file</string>
     <string name="file_uploading">uploading file...</string>
     <string name="file_upload_finished">File has been uploaded</string>
     <string name="has_finished">Finished:%1$d/%1$d</string>
     <string name="qrcode_tips">Align the QR Code within the frame to scan</string>
-    
+    <string name="waiting_for_upload">Waiting for upload</string>
+    <string name="waiting_upload_last">New task waiting for upload,Left:</string>
     <string name="mobile_network_tips">Whether to use the mobile network to upload</string>
 
     <!-- login -->
@@ -26,6 +28,7 @@
     <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="action_settings">Settings</string>
     <string name="skip">skip</string>
+    <string name="failed_connect">Failed when connect to the server</string>
 
     <!-- base -->
     <string name="dialog_title_info">Information</string>
@@ -92,6 +95,8 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="done">Done</string>
     <string name="tips">Reminder</string>
+    <string name="photo_uploaded">This photo has been uploaded!</string>
+    
     <string name="piv_exist_message">图片已经上传过，是否任然上传</string>
     <string name="upload_though">仍然上传</string>
 

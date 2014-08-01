@@ -100,10 +100,11 @@ public class ImageManager {
 	private ImageManager(Context context) {
 		int memClass = ((ActivityManager) context
 				.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryClass();
-		memClass = memClass > 32 ? 32 : memClass;
+		Log.v("Memory Size", memClass + "");
+		//memClass = memClass > 32 ? 32 : memClass;
 		// 使用可用内存的1/4作为图片缓存
 		final int cacheSize = 1024 * 1024 * memClass / 8;
-
+		
 		mMemoryCache = new LruCache<String, Bitmap>(cacheSize) {
 
 			protected int sizeOf(String key, Bitmap bitmap) {
@@ -231,7 +232,7 @@ public class ImageManager {
 		// 读取map缓存
 		Bitmap bitmap = mMemoryCache.get(url + width + height);
 		if (bitmap != null) {
-			Log.v("ImageManager2", "Memomry From!" + url);
+			//Log.v("ImageManager2", "Memomry From!" + url);
 			setImageBitmap(imageView, bitmap, false);
 			return;
 		}
@@ -334,7 +335,7 @@ public class ImageManager {
 							bitmap = mDiskCache.get(url);
 						}
 						if(bitmap == null) {
-							Log.v("ImageManager2", "From Sdcard!" + url);
+							//Log.v("ImageManager2", "From Sdcard!" + url);
 							tBitmap = null;
 							BitmapFactory.Options opt = new BitmapFactory.Options();
 							opt.inSampleSize = 1;
@@ -365,7 +366,7 @@ public class ImageManager {
 								}
 							}
 						} else {
-							Log.v("ImageManager2", "Disk Cache From!" + url);
+							//Log.v("ImageManager2", "Disk Cache From!" + url);
 						}
 						
 						if (bitmap != null) {

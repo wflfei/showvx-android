@@ -4,12 +4,14 @@ import java.nio.MappedByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 
 import com.vxplo.vxshow.R;
+import com.vxplo.vxshow.activity.RecordActivity;
 import com.vxplo.vxshow.app.VxploApplication;
 import com.vxplo.vxshow.util.DialogUtil;
 import com.vxplo.vxshow.util.NetworkUtil;
@@ -36,7 +38,7 @@ public class UploadTask {
 		if(null != uploadsTask) {
 			this.uploadsTask.add(task);
 			if(uploadsTask.size() >= 2) {  //多个上传任务等待中
-				NotificationUtil.notify("上传等待中", "上传等待中", "新任务上传等待中，剩余：" + (uploadsTask.size() - 1), NotificationUtil.NOTIFY_UP_WAITING);
+				NotificationUtil.notify(R.string.waiting_for_upload, R.string.waiting_for_upload, VxploApplication.resources.getString(R.string.waiting_upload_last) + (uploadsTask.size() - 1), NotificationUtil.NOTIFY_UP_WAITING);
 			}else {    //当前是第一个上传任务
 				boolean ignored = VxploApplication.getInstance().getPref("mobile_ignore").getBoolean("ignored", false);
 				if(NetworkUtil.getNetworkState(VxploApplication.getInstance()) == NetworkUtil.NETWORN_WIFI) {
@@ -45,7 +47,13 @@ public class UploadTask {
 					if(ignored) {
 						task.execute();
 					} else {
-						Builder builder = new AlertDialog.Builder(VxploApplication.getInstance().getMainActivity());
+						Activity activity;
+						if(VxploApplication.getInstance().getTopActivity() instanceof RecordActivity) {
+							activity = VxploApplication.getInstance().getTopActivity();
+						} else {
+							activity = VxploApplication.getInstance().getMainActivity();
+						}
+						Builder builder = new AlertDialog.Builder(activity);
 						//builder.setIcon(R.drawable.ic_launcher);
 						builder.setTitle(R.string.mobile_network_tips);
 						//builder.setMessage(R.string.mobile_network_tips);

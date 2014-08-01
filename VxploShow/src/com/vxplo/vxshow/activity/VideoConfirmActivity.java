@@ -7,6 +7,7 @@ import com.vxplo.vxshow.util.FileUtil;
 import com.vxplo.vxshow.util.MediaUtil;
 import com.vxplo.vxshow.util.fileupload.FileUpload;
 import com.vxplo.vxshow.util.fileupload.UploadTask;
+import com.vxplo.vxshow.util.upload.UploadManager;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -58,7 +59,8 @@ public class VideoConfirmActivity extends VxBaseActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				UploadTask.getInstance().addUploadTask(new FileUpload(getApplicationContext(), MediaType.VIDEO).upload(filePath));
+				//UploadTask.getInstance().addUploadTask(new FileUpload(getApplicationContext(), MediaType.VIDEO).upload(filePath));
+				UploadManager.getInstance().addUploadTask(new com.vxplo.vxshow.util.upload.UploadTask(MediaType.VIDEO, filePath));
 				finish();
 			}
 		});

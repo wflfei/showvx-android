@@ -17,8 +17,10 @@ import com.vxplo.vxshow.util.DialogUtil;
 import com.vxplo.vxshow.util.fileupload.FileUpload;
 import com.vxplo.vxshow.util.fileupload.UploadTask;
 import com.vxplo.vxshow.util.imageloader.ImageManager;
+import com.vxplo.vxshow.util.upload.UploadManager;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.ActionBar.LayoutParams;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -28,6 +30,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -55,12 +58,13 @@ public class AlbumActivity extends VxBaseActivity{
 	private AlbumGridViewAdapter gridImageAdapter;
 	private LinearLayout selectedImageLayout;
 	private HorizontalScrollView scrollview;
-	private int size = 6 ;
+	private int size = 50 ;
 	private VxshowSqliteOpenHelper dbHelper;
 	private List<String> uploadedPath;
 	private boolean hasUploaded = false;
+	private DisplayMetrics dm;
 	
-	public static ImageLoader albumLoader;
+	//public static ImageLoader albumLoader;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,11 +72,14 @@ public class AlbumActivity extends VxBaseActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_album);
 		dbHelper = new VxshowSqliteOpenHelper(this);
-		initAlbumImageLoader();
+		//initAlbumImageLoader();
 		initActionBar();
 		selectedDataList = new ArrayList<HashMap<String, String>>();
 		init();
 		initListener();
+		dm = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay()
+				.getMetrics(dm);
 	}
 
 	private void initActionBar() {
@@ -104,13 +111,14 @@ public class AlbumActivity extends VxBaseActivity{
 		refreshData();
 		selectedImageLayout = (LinearLayout)findViewById(R.id.selected_image_layout);
 		scrollview = (HorizontalScrollView)findViewById(R.id.scrollview);
-		initSelectImage();
+		//initSelectImage();
 		paths = new ArrayList<String>();
 		initUploadedPath();
 	}
 	
-	
+	/*
 	public void initAlbumImageLoader() {
+		
 		DisplayImageOptions options = new DisplayImageOptions.Builder()
 		.showStubImage(R.drawable.ic_launcher) // 在ImageView加载过程中显示图片  
         .showImageForEmptyUri(R.drawable.ic_launcher) // image连接地址为空时  
@@ -126,8 +134,8 @@ public class AlbumActivity extends VxBaseActivity{
 
 		albumLoader = ImageLoader.getInstance();
 		albumLoader.init(config);
-	}
-	
+	}*/
+	/*
 	private void initSelectImage() {
 		if(selectedDataList==null)
 			return;
@@ -146,7 +154,7 @@ public class AlbumActivity extends VxBaseActivity{
 				}
 			});
 		}
-	}
+	}*/
 
 	private void initListener() {
 		
@@ -167,7 +175,7 @@ public class AlbumActivity extends VxBaseActivity{
 						return;
 					}
 					if(hasUploaded(path)) {
-						DialogUtil.showToast(mApplication, "该图片已经上传");
+						DialogUtil.showToast(mApplication, R.string.photo_uploaded);
 						return;
 					}
 					check.setVisibility(View.VISIBLE) ;
@@ -205,7 +213,9 @@ public class AlbumActivity extends VxBaseActivity{
 						paths.add(path);
 						hashMap.put(path, imageView);
 						selectedDataList.add(thum);
-						albumLoader.displayImage("file:///" + path, imageView);
+						ImageManager.from(ctx).displayImage(imageView,
+								path, R.drawable.camera_default , (dm.widthPixels-dipToPx(10)) / 3, (dm.widthPixels-dipToPx(10)) / 3);
+						//albumLoader.displayImage("file:///" + path, imageView);
 						imageView.setOnClickListener(new View.OnClickListener() {
 							
 							@Override
@@ -379,7 +389,8 @@ public class AlbumActivity extends VxBaseActivity{
 
 	public void upload() {
 		// TODO Auto-generated method stub
-		UploadTask.getInstance().addUploadTask(new FileUpload(mApplication, MediaType.IMAGE).upload(paths));
+		//UploadTask.getInstance().addUploadTask(new FileUpload(mApplication, MediaType.IMAGE).upload(paths));
+		UploadManager.getInstance().addUploadTask(new com.vxplo.vxshow.util.upload.UploadTask(MediaType.IMAGE, paths));
 		finish();
 	}
 	
@@ -411,6 +422,10 @@ public class AlbumActivity extends VxBaseActivity{
 		db.endTransaction();
 		cursor.close();
 		
+	}
+	
+	public int dipToPx(int dip) {
+		return (int) (dip * dm.density + 0.5f);
 	}
 
 }

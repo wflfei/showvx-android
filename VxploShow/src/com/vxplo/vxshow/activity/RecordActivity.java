@@ -24,6 +24,7 @@ import android.view.ContextMenu;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -189,6 +190,11 @@ public class RecordActivity extends VxBaseActivity {
 				menu.add(0, MENU_ID_DELETE, MENU_ID_DELETE, resources.getString(R.string.delete));
 			}
 		});
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	
@@ -433,69 +439,5 @@ public class RecordActivity extends VxBaseActivity {
    		}
    		return true;
    	}
-	
-	/*
-	private void startRecord()
-	{
-		String bbsDir = FileUtil.getVxRecordsDir();
-		Date date = new Date();
-		SimpleDateFormat formater = new SimpleDateFormat("yyyyMMddHHmmss");
-		String str = formater.format(date);
-		mVoiceFileName = bbsDir + "/audio" + str + ".amr";
-		Log.d("Voice File Name", mVoiceFileName);
-		mRecorder = new MediaRecorder();
-		mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-		mRecorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
-		mRecorder.setOutputFile(mVoiceFileName);
-		mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
-		mRecorder.setMaxDuration(30000);
-		mRecorder.setOnInfoListener(new OnInfoListener() {
-			
-			@Override
-			public void onInfo(MediaRecorder mr, int what, int extra) {
-				if(what == MediaRecorder.MEDIA_RECORDER_INFO_MAX_DURATION_REACHED) {
-					stopRecord();
-					
-				}
-			}
-		});
-		
-		try {
-			mRecorder.prepare();
-		} catch (IOException e) {
-			Log.e("", "prepare() failed");
-		}
-		mRecorder.start();
-		recordAnimImage.setVisibility(View.VISIBLE);
-		anim.start();
-		recordBtn.setText("点击结束录音");
-		isRecording = true;
-		chronometer.setBase(SystemClock.elapsedRealtime());
-	    chronometer.start();  //开始计数
-	}
-	*/
-	/*
-	private void stopRecord() {
-		try {
-			mRecorder.stop();
-			mRecorder.release();
-			mRecorder = null;
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		chronometer.stop();
-		isRecording = false;
-		recordBtn.setText("点击开始录音");
-		recordAnimImage.setVisibility(View.INVISIBLE);
-		anim.stop();
-		recordPaths.add(mVoiceFileName);
-		initRecordsData();
-		arrayAdapter.notifyDataSetChanged();
-		new FileUpload(ctx, MediaType.AUDIO).upload(mVoiceFileName);
-		NotificationUtil.notifyUploading();
-	}
-
-*/
 
 }

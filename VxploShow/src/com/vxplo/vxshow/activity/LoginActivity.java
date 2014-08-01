@@ -1,10 +1,14 @@
 package com.vxplo.vxshow.activity;
 
+import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.vxplo.vxshow.R;
 import com.vxplo.vxshow.app.VxploApplication;
+import com.vxplo.vxshow.asynchttp.VxHttpClient;
 import com.vxplo.vxshow.entity.User;
 //import com.vxplo.vxshow.fragment.ProjectListFragment.ListType;
 import com.vxplo.vxshow.http.VxHttpCallback;
@@ -92,7 +96,7 @@ public class LoginActivity extends VxBaseActivity {
 				String username = emailEdit.getText().toString();
 				String password = passwordEdit.getText().toString();
 				if(!"".equals(username) && !"".equals(password)) {
-					doLogin();
+					doAsyncLogin();
 				}else {
 					Toast.makeText(getApplicationContext(), "请输入用户名和密码", Toast.LENGTH_LONG).show();
 				}
@@ -149,6 +153,58 @@ public class LoginActivity extends VxBaseActivity {
 		}
 	}
 
+	private void doAsyncLogin() {
+		closeKeyboard();
+		String username = emailEdit.getText().toString().trim();
+		String password = passwordEdit.getText().toString().trim();
+		RequestParams params = new RequestParams();
+		params.add("username", username);
+		params.add("password", password);
+		VxHttpClient.post(Constant.getUserLoginUrl(), params, false, new AsyncHttpResponseHandler() {
+			@Override
+			public void onStart() {
+				LoginActivity.this.showLoadingDialog();
+				super.onStart();
+			}
+			
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+				// TODO Auto-generated method stub
+				String result = new String(arg2);
+				Log.d("LoginResult", result);
+				try {
+					tryLogin(result);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
+				// TODO Auto-generated method stub
+				if(arg2 != null && arg2.length>0) {
+					String wrongDetail = new String(arg2);
+					if(wrongDetail.startsWith("Unauthorized")) {
+						DialogUtil.showToast(ctx, "用户名或密码错误");
+					} else {
+						DialogUtil.showToast(ctx, wrongDetail);
+						Log.e("LoginError EXp", wrongDetail);
+					}
+				}else{
+					Toast.makeText(ctx, R.string.failed_connect, Toast.LENGTH_SHORT).show();
+					Log.e("LoginError Sta", "网络连接错误");
+				}
+			}
+			
+			@Override
+			public void onFinish() {
+				closeLoadingDialog();
+				super.onFinish();
+			}
+		});
+	}
+	
 	private void doLogin() {
 		closeKeyboard();
 		String username = emailEdit.getText().toString().trim();
@@ -208,11 +264,12 @@ public class LoginActivity extends VxBaseActivity {
 			VxploApplication.getInstance().setSession("sessid", res.optString("sessid"));
 			VxploApplication.getInstance().setSession("sessname", res.optString("session_name"));
 			final Context c = ctx;
-			VxploApplication.getInstance().getToken(new Runnable() {
+			VxploApplication.getInstance().getTokenA(new Runnable() {
 				@Override
 				public void run() {
 					Intent intent = new Intent(c,MainActivity.class);
 					//intent.putExtra("current", ListType.PROJECTS.ordinal());
+					intent.putExtra("upload", true);
 					c.startActivity(intent);
 					mApplication.removeAllActivities();
 				}

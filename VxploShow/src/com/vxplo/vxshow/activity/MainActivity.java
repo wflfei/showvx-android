@@ -7,9 +7,13 @@ import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.http.Header;
+
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.slidingmenu.lib.SlidingMenu;
 import com.vxplo.vxshow.R;
 import com.vxplo.vxshow.app.VxploApplication;
+import com.vxplo.vxshow.asynchttp.VxHttpClient;
 import com.vxplo.vxshow.entity.User;
 import com.vxplo.vxshow.fragment.ProjectListFragment2;
 import com.vxplo.vxshow.http.VxHttpCallback;
@@ -25,6 +29,7 @@ import com.vxplo.vxshow.util.PopMenuUtil;
 import com.vxplo.vxshow.util.fileupload.FileUpload;
 import com.vxplo.vxshow.util.fileupload.UploadTask;
 import com.vxplo.vxshow.util.imageloader.MD5;
+import com.vxplo.vxshow.util.upload.UploadManager;
 import com.vxplo.vxshow.util.zxing.CaptureActivity;
 
 import android.app.ActionBar;
@@ -96,6 +101,9 @@ public class MainActivity extends VxBaseActivity {
 		setCurrentBtn();
 		setCurrentFragmet();
 		checkForUpdate();
+		if(getIntent().getBooleanExtra("upload", false)) {
+			UploadManager.getInstance().startUploadIfHave();
+		}
 	}
 	
 	private void findViews() {
@@ -266,7 +274,8 @@ public class MainActivity extends VxBaseActivity {
 	        	if (c != null && c.moveToFirst()) {
 	        		String filPath = c.getString(0);
 	        		Log.v("Take Video Path", filPath);
-	        		UploadTask.getInstance().addUploadTask(new FileUpload(this, MediaType.VIDEO).upload(filPath));
+	        		//UploadTask.getInstance().addUploadTask(new FileUpload(this, MediaType.VIDEO).upload(filPath));
+	        		UploadManager.getInstance().addUploadTask(new com.vxplo.vxshow.util.upload.UploadTask(MediaType.VIDEO, filPath));
 	        	}
 	        	
 	        }
@@ -280,7 +289,8 @@ public class MainActivity extends VxBaseActivity {
 	        		mApplication.addUploadTask(new FileUpload(this, MediaType.IMAGE).upload(filPath));
 	        	}*/
 	        	String path = resolvePhotoFromIntent(ctx, data);
-	        	UploadTask.getInstance().addUploadTask(new FileUpload(this, MediaType.IMAGE).upload(path));
+	        	//UploadTask.getInstance().addUploadTask(new FileUpload(this, MediaType.IMAGE).upload(path));
+	        	UploadManager.getInstance().addUploadTask(new com.vxplo.vxshow.util.upload.UploadTask(MediaType.IMAGE, path));
 	        }
 	        else if(requestCode == REQUEST_CODE_SELECT_VIDEO) {
 	        	Uri uri = data.getData();
@@ -288,7 +298,8 @@ public class MainActivity extends VxBaseActivity {
 	        	if (c != null && c.moveToFirst()) {
 	        		String filPath = c.getString(0);
 	        		Log.v("Select Video Path", filPath);
-	        		UploadTask.getInstance().addUploadTask(new FileUpload(this, MediaType.VIDEO).upload(filPath));
+	        		//UploadTask.getInstance().addUploadTask(new FileUpload(this, MediaType.VIDEO).upload(filPath));
+	        		UploadManager.getInstance().addUploadTask(new com.vxplo.vxshow.util.upload.UploadTask(MediaType.VIDEO, filPath));
 	        	}
 	        	
 	        }
@@ -298,7 +309,8 @@ public class MainActivity extends VxBaseActivity {
 	        	if (c != null && c.moveToFirst()) {
 	        		String filPath = c.getString(0);
 	        		Log.v("Select Photo Path", filPath);
-	        		UploadTask.getInstance().addUploadTask(new FileUpload(this, MediaType.IMAGE).upload(filPath));
+	        		//UploadTask.getInstance().addUploadTask(new FileUpload(this, MediaType.IMAGE).upload(filPath));
+	        		UploadManager.getInstance().addUploadTask(new com.vxplo.vxshow.util.upload.UploadTask(MediaType.IMAGE, filPath));
 	        	}
 	        }
 		}
@@ -436,6 +448,42 @@ public class MainActivity extends VxBaseActivity {
 		}
 	}
 	
+	private void doLogoutAsync() {
+		Log.v("MainActivity", "logout...");
+		VxHttpClient.post(Constant.getUserLogoutUrl(), null, true, new AsyncHttpResponseHandler() {
+			@Override
+			public void onStart() {
+				DialogUtil.showLoadingDialog(ctx);
+				super.onStart();
+			}
+			
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+				// TODO Auto-generated method stub
+				User.clearUser();
+				VxploApplication.getInstance().removeSession("sessid");
+				VxploApplication.getInstance().removeSession("sessname");
+				logoutToLoginPage();
+			}
+			
+			@Override
+			public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
+				// TODO Auto-generated method stub
+				if(arg2 != null && arg2.length > 0) {
+					DialogUtil.showToast(ctx, new String(arg2));
+					return;
+				}
+				Toast.makeText(ctx, R.string.failed_connect, Toast.LENGTH_SHORT).show();
+			}
+			
+			@Override
+			public void onFinish() {
+				DialogUtil.closeLoadingDialog();
+				super.onFinish();
+			}
+		});
+	}
+	
 	private void doLogout() {
 		// TODO Auto-generated method stub
 		Log.v("MainActivity", "logout...");
@@ -558,7 +606,7 @@ public class MainActivity extends VxBaseActivity {
 			int id = v.getId();
 			int last = current;
 			if(id == R.id.leftmenu_btn_log_out) {
-				doLogout();
+				doLogoutAsync();
 				return;
 			} else if (id == R.id.leftmenu_btn_ins) {
 				current = 0;

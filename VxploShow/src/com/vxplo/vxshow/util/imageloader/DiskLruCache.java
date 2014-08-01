@@ -47,7 +47,7 @@ public class DiskLruCache {
 	private final File mCacheDir;
 	private int cacheSize = 0;
 	private int cacheByteSize = 0;
-	private final int maxCacheItemSize = 64; // 64 item default
+	private final int maxCacheItemSize = 256; // 64 item default
 	private long maxCacheByteSize = 1024 * 1024 * 5; // 5MB default
 	private CompressFormat mCompressFormat = CompressFormat.JPEG;
 	private int mCompressQuality = 70;

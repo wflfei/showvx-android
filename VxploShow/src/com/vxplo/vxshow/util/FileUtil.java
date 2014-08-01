@@ -96,6 +96,19 @@ public class FileUtil {
 		}
 	}
 	
+	public static String getVxCacheDir() {
+		if(hasSdcard()) {
+			String fileDir = getVxShowFileDir() + "/cache";
+			File file = new File(fileDir);
+			if(!file.exists()) {
+				file.mkdirs();
+			}
+			return fileDir;
+		}else {
+			return null;
+		}
+	}
+	
 	public static String getVxVideosDir() {
 		if(hasSdcard()) {
 			String fileDir = getVxShowFileDir() + "/videos";

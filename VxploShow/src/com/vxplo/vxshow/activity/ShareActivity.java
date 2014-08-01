@@ -18,6 +18,7 @@ import com.vxplo.vxshow.entity.User;
 import com.vxplo.vxshow.util.NotificationUtil;
 import com.vxplo.vxshow.util.fileupload.FileUpload;
 import com.vxplo.vxshow.util.fileupload.UploadTask;
+import com.vxplo.vxshow.util.upload.UploadManager;
 
 public class ShareActivity extends VxBaseActivity {
 	private boolean multiple;
@@ -27,9 +28,7 @@ public class ShareActivity extends VxBaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_share);
-		if(User.getCurrentUser() == null) {
-			goLoginPage();
-		}
+		
 		Intent intent = getIntent();
 		String type = intent.getType();
 		Log.v("ShareActivity", "MediaType: " + type);
@@ -85,17 +84,34 @@ public class ShareActivity extends VxBaseActivity {
 				else
 					mediaType = getFileType(paths);
 			}
-			if(mediaType != null) {
-				if(multiple) {
-					UploadTask.getInstance().addUploadTask(new FileUpload(getApplicationContext(), mediaType).upload(paths));
-				} else {
-					UploadTask.getInstance().addUploadTask(new FileUpload(getApplicationContext(), mediaType).upload(path));
+			if(User.getUserFromPref().getUid() > 0) {
+				if(mediaType != null) {
+					if(multiple) {
+						//UploadTask.getInstance().addUploadTask(new FileUpload(getApplicationContext(), mediaType).upload(paths));
+						UploadManager.getInstance().addUploadTask(new com.vxplo.vxshow.util.upload.UploadTask(mediaType, paths));
+					} else {
+						//UploadTask.getInstance().addUploadTask(new FileUpload(getApplicationContext(), mediaType).upload(path));
+						UploadManager.getInstance().addUploadTask(new com.vxplo.vxshow.util.upload.UploadTask(mediaType, path));
+					}
 				}
+				Intent jump = new Intent(this, MainActivity.class);
+				startActivity(jump);
+				VxploApplication.getInstance().removeActivity(this);
+			} else {
+				if(mediaType != null) {
+					if(multiple) {
+						//UploadTask.getInstance().addUploadTask(new FileUpload(getApplicationContext(), mediaType).upload(paths));
+						UploadManager.getInstance().addUploadTaskNoUpload(new com.vxplo.vxshow.util.upload.UploadTask(mediaType, paths));
+					} else {
+						//UploadTask.getInstance().addUploadTask(new FileUpload(getApplicationContext(), mediaType).upload(path));
+						UploadManager.getInstance().addUploadTaskNoUpload(new com.vxplo.vxshow.util.upload.UploadTask(mediaType, path));
+					}
+				}
+				goLoginPage();
 			}
 		}
-		Intent jump = new Intent(this, MainActivity.class);
-		startActivity(jump);
-		VxploApplication.getInstance().removeActivity(this);
+		
+		
 	}
 		
 	/**
@@ -166,5 +182,5 @@ public class ShareActivity extends VxBaseActivity {
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			finish();
-		}
+	}
 }

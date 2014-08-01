@@ -467,4 +467,7 @@ public class DialogUtil {
 		Toast.makeText(ctx, msg, Toast.LENGTH_SHORT).show();
 	}
 
+	public static void showToast(Context ctx, int msg) {
+		Toast.makeText(ctx, msg, Toast.LENGTH_SHORT).show();
+	}
 }

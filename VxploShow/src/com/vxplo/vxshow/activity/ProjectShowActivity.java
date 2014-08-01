@@ -93,7 +93,7 @@ public class ProjectShowActivity extends VxBaseActivity {
 //	      String cacheDirPath = getCacheDir().getAbsolutePath()+Constant.APP_DB_DIRNAME;  
         Log.i(TAG, "cacheDirPath="+cacheDirPath);  
         //设置数据库缓存路径  
-        settings.setDatabasePath(cacheDirPath);  
+        //settings.setDatabasePath(cacheDirPath);  
         //设置  Application Caches 缓存目录  
         settings.setAppCachePath(cacheDirPath);  
         //开启 Application Caches 功能  
@@ -366,5 +366,22 @@ public class ProjectShowActivity extends VxBaseActivity {
 	private void delayedHide(int delayMillis) {
 		mHideHandler.removeCallbacks(mHideRunnable);
 		mHideHandler.postDelayed(mHideRunnable, delayMillis);
+	}
+	
+	@Override
+	protected void onResume() {
+		webView.onResume();
+		super.onResume();
+	}
+	
+	@Override
+	protected void onPause() {
+		webView.onPause();
+		super.onPause();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
 	}
 }

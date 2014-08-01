@@ -33,7 +33,7 @@
         	    android:layout_width="wrap_content"
         	    android:layout_height="wrap_content"
         	    android:layout_marginLeft="5dp"
-        	    android:text="@string/downloading_update"
+        	    android:text="@string/file_uploading"
         	    />
         
     	</LinearLayout>
